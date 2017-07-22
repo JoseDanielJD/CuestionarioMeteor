@@ -1,25 +1,97 @@
 <head>
-  <title>p</title>
+  <title>Vote</title>
 </head>
 
 <body>
-  <h1>Welcome to Meteor!</h1>
 
-  {{> hello}}
-  {{> info}}
+  {{> sideBar}}
+  {{> content}}
+
+
 </body>
 
-<template name="hello">
-  <button>Click Me</button>
-  <p>You've pressed the button {{counter}} times.</p>
+<template name="sideBar">
+  <div id="sideBar" class="col-md-3 col-lg-3">
+    <div id="sideBarUser">
+      <div id="contentUser">
+        <img src="https://www.buenasalud.net/wp-content/uploads/imagenes/3-ejercicios-faciales-para-embellecer-el-rostro-.jpg" id="avatar" class="img-circle" width="50" height="50">
+        <div id="name">
+          <label>Jhon Logan</label><br>
+        </div>
+      </div>
+    </div>  
+    <div id="sideBarOptions">
+      {{>option}}
+    </div>
+  </div>
 </template>
 
-<template name="info">
-  <h2>Learn Meteor!</h2>
-  <ul>
-    <li><a href="https://www.meteor.com/try" target="_blank">Do the Tutorial</a></li>
-    <li><a href="http://guide.meteor.com" target="_blank">Follow the Guide</a></li>
-    <li><a href="https://docs.meteor.com" target="_blank">Read the Docs</a></li>
-    <li><a href="https://forums.meteor.com" target="_blank">Discussions</a></li>
-  </ul>
+<template name="content">
+  <div class="col-md-8 col-lg-8">
+    {{> bar}}
+    {{> item title="De que color se pintara las rejas del pasillo?"}}
+    {{> item title="cual libro es mejor?"}}
+    {{> item title="cual pais es mas seguro?"}}
+    {{> item title="cual laptop tiene mejor rendimiento?"}}
+    {{> item title="cual telefono tiene la pantalla con mejor calidad de color?"}}
+
+  </div>
 </template>
+
+<template name="bar">
+  <div class="container">  
+    <div class="container col-md-12 col-md-push-8">
+       <a href="#AddItem" id="add-button" class="btn btn-primary">Add</a>
+    </div>
+  </div>
+</template>
+
+
+<template name="item">
+  <div id="item" class="row">
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+        {{title}}
+      </div>
+      <div class="panel-footer">
+        <div class="row">
+          <div class="col-md-12">
+            <div id="time">
+              <label>Tiempo restante: 5 dias</label>
+            </div>
+          </div>
+          
+          <div class="col-md-6">
+            <div id="contentProgressBar">
+              <div class="progress">
+                <div class="progress-bar-info" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;">
+                60%
+              </div>
+              <label>60/100</label>
+              </div>
+            </div>         
+          </div>        
+          
+          <div class="col-md-6">
+            <div id="itemButtons" class="col-md-12 col-md-push-3">
+              <button type="button" class="btn btn-secondary">+</button>
+              <button type="button" class="btn btn-secondary">+</button>
+              <button type="button" class="btn btn-secondary">+</button>
+            </div>          
+          </div>          
+        </div>
+      </div>
+    </div>
+  </div>
+  
+</template>
+
+<template name="option">
+  <div class="list-group">
+    <a href="#" class="list-group-item">Dapibus ac facilisis in</a>
+    <a href="#" class="list-group-item">Morbi leo risus</a>
+    <a href="#" class="list-group-item">Porta ac consectetur ac</a>
+    <a href="#" class="list-group-item">Vestibulum at eros</a>
+  </div>
+</template>
+

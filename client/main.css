@@ -1,1 +1,32 @@
-/* CSS declarations go here */
+#sideBar{
+    background: #EBE7E7;
+    height: 1000px;
+    overflow: hidden;
+}
+
+#item{
+  margin-top: 1%;
+  margin-left: 1%;
+}
+
+#sideBarUser{
+  background-image: url("https://static.vecteezy.com/system/resources/previews/000/095/276/non_2x/abstract-gradient-background-vector.jpg");
+  height: 20%;
+}
+
+#sideBar{
+    padding: 0;
+}
+
+#avatar{
+    margin-left: 40%;
+}
+
+#name{
+    padding-left: 35%;
+}
+
+#contentUser{
+    padding-top: 15%;
+}
+
