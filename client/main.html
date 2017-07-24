@@ -24,7 +24,7 @@
       <div id="contentUser">
         <img src="https://www.buenasalud.net/wp-content/uploads/imagenes/3-ejercicios-faciales-para-embellecer-el-rostro-.jpg" id="avatar" class="img-circle" width="50" height="50">
         <div id="name">
-          <label>Jhon Logan</label><br>
+          <label>Jhon Loganh</label><br>
         </div>
       </div>
     </div>  
@@ -37,12 +37,7 @@
 <template name="content">
   <div class="col-md-8 col-lg-8">
     {{> bar}}
-    {{> item title="De que color se pintara las rejas del pasillo?"}}
-    {{> item title="cual libro es mejor?"}}
-    {{> item title="cual pais es mas seguro?"}}
-    {{> item title="cual laptop tiene mejor rendimiento?"}}
-    {{> item title="cual telefono tiene la pantalla con mejor calidad de color?"}}
-
+    {{>itemsLoaded}}
   </div>
 </template>
 
@@ -55,18 +50,25 @@
   </div>
 </template>
 
+<template name="itemsLoaded">
+   {{#each  LoadItem}}
+        {{> item title=title duration=duration createdAt=createdAt}}
+  {{/each}}
+</template>
+
 
 <template name="item">
+  
   <div id="item" class="row">
     <div class="panel panel-primary">
       <div class="panel-heading">
-        {{title}}
+        {{title}} 
       </div>
       <div class="panel-footer">
         <div class="row">
           <div class="col-md-12">
             <div id="time">
-              <label>Tiempo restante: 5 dias</label>
+              <label>Tiempo restante: {{duration}} (Hours)</label>
             </div>
           </div>
           
@@ -76,7 +78,6 @@
                 <div class="progress-bar-info" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;">
                 60%
               </div>
-              <label>60/100</label>
               </div>
             </div>         
           </div>        
@@ -86,6 +87,7 @@
               <button type="button" class="btn btn-secondary"><i class="glyphicon glyphicon-eye-open"></i></button>
               <button type="button" class="btn btn-secondary"><i class="glyphicon glyphicon-pause"></i></button>
               <button type="button" class="btn btn-secondary"><i class="glyphicon glyphicon-edit"></i></button>
+              <button type="button" class="btn btn-secondary"><i class="glyphicon glyphicon-link"></i></button>
               <button type="button" class="btn btn-secondary btn-danger"><i class="glyphicon glyphicon-trash"></i></button>
             </div>          
           </div>          
@@ -99,7 +101,6 @@
 <template name="option">
   <div class="list-group">
     <a href="#" class="list-group-item">Perfil</a>
-    <a href="#" class="list-group-item">Contactos</a>
     <a href="#" class="list-group-item">Estadisticas</a>
     <a href="#" class="list-group-item">Tops</a>
   </div>
@@ -112,23 +113,24 @@
       <div class="panel-body">
         <form class="new-item" >
           <label for="basic-url">TITLE</label>
-          <input type="text" name="addmore" class="form-control" placeholder="Type a title">
+          <input type="text" name="addmore" id="title" class="form-control" placeholder="Type a title">
           <div class="divider"></div>
           <div class="input-group control-group after-add-more">
             <label for="basic-url">ANSWERS</label>						
-            <input type="text" name="addmore2" class="form-control" placeholder="Type a posible answer">
+            <input type="text" name="addmore" id="questionItem" class="form-control" placeholder="Type a posible answer">
             <div class="input-group-btn"> 
               <button class="btn btn-success add-more" type="button"><i class="glyphicon glyphicon-plus"></i></button>
             </div>
           </div>
           
           <div class="divider"></div>        
-          <label for="basic-url">USERS</label>
-          <input type="text" name="addmore2" class="form-control" placeholder="Type users' emails">
-          <div class="col-md-12 col-md-push-5">
-            <button type="submit" class="btn btn-primary" >Submit</button>         
-          </div>
+          <label for="basic-url">DURATION</label>
+          <input type="text" name="addmore" class="form-control" id="duration" placeholder="Type duration in hours">
   
+         <div class="col-md-12 col-md-push-5" id="submitNewItem">
+            <button type="submit" class="btn btn-primary" >Submit</button>         
+         </div>             
+
         </form>
       </div>
     </div>
