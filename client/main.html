@@ -14,7 +14,7 @@
 </template>
 
 <template name="mainView">
-    {{> sideBar}}
+    <!--{{> sideBar}}-->
     {{> content}}
 </template>
 
@@ -35,19 +35,61 @@
 </template>
 
 <template name="content">
-  <div class="col-md-8 col-lg-8">
-    {{> bar}}
+  {{> bar}}
+  <div class="col-md-8 col-lg-8 col-md-push-2" id="content">
+    {{> infoItemNAdd}}
     {{>itemsLoaded}}
   </div>
 </template>
 
 <template name="bar">
-  <div class="container">
-    <h4>Cantidad de encuestas: {{CantItems}}</h4>  
-    <div class="container col-md-12 col-md-push-8">
-       <a href="AddItem" id="add-button" class="btn btn-primary">Add</a>
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#">Survey pool</a>
     </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <!--Left-->
+      <form class="navbar-form navbar-left">
+        <div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default"><i class="glyphicon glyphicon-search"></i></button>
+      </form>
+      
+      <!--other buttons-->
+      <ul class="nav navbar-nav">
+        <li><a href="#">Stadistics<span class="sr-only">(current)</span></a></li>
+        <li><a href="#">Profile</a></li>
+        <li><a href="#">Tops</a></li>
+      </ul>
+      
+      <!--Rigth-->
+      <ul class="nav navbar-nav navbar-right ">
+        {{> loginButtons}}
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+</template>
+
+<template name="infoItemNAdd">
+  <div class="row">
+    <div class="col-md-12">
+       <h4>Cantidad de encuestas: {{CantItems}}</h4> 
+       <a href="AddItem" id="add-button" class="btn btn-primary">Add</a>    
+    </div>    
   </div>
+ 
 </template>
 
 <template name="itemsLoaded">
@@ -60,7 +102,7 @@
 <template name="item">
   
   <div id="item" class="row">
-    <div class="panel panel-primary">
+    <div class="panel panel-default">
       <div class="panel-heading">
         {{title}} 
       </div>
@@ -84,12 +126,14 @@
           
           <div class="col-md-6">
             <div id="itemButtons" class="col-md-12 col-md-push-3">
-              <button type="button" class="btn btn-secondary"><i class="glyphicon glyphicon-eye-open"></i></button>
-              <button type="button" class="btn btn-secondary"><i class="glyphicon glyphicon-pause"></i></button>
-              <button type="button" class="btn btn-secondary"><i class="glyphicon glyphicon-edit"></i></button>
-              <button type="button" class="btn btn-secondary"><i class="glyphicon glyphicon-link"></i></button>
-              <button type="button" class="btn btn-secondary btn-danger"><i class="glyphicon glyphicon-trash"></i></button>
-            </div>          
+              
+              <a href="watch" id={{title}} class="btn btn-secondar"><i class="glyphicon glyphicon-eye-open"></i></a>
+              <a href="" id="add-button" class="btn btn-secondar"><i class="glyphicon glyphicon-pause"></i></a>
+              <a href="edit" id="add-button" class="btn btn-secondar"><i class="glyphicon glyphicon-edit"></i></a>
+              <a href="" id="add-button" class="btn btn-secondar"><i class="glyphicon glyphicon-link"></i></a>
+              <a href="" id="add-button" class="btn btn-secondar btn-danger"><i class="glyphicon glyphicon-trash"></i></a>
+              
+              </div>          
           </div>          
         </div>
       </div>
@@ -140,3 +184,22 @@
 
 </template>
 
+<template name="watch">
+  <div class="container">
+    <div class="panel panel-default">
+      <div class="panel-heading"><label for="">{{title}}</label></div>
+      <div class="panel-body">
+          
+          <div class="input-group control-group after-add-more">
+            <label for="basic-url">ANSWERS</label>						
+          </div>
+          
+          <div class="divider"></div>        
+          <label for="basic-url">DURATION: {{duration}}</label>
+
+      </div>
+    </div>  
+  </div>
+<a href="/" id="add-button" class="btn btn-default">back</a>
+  
+</template>

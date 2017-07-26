@@ -7,6 +7,12 @@ Meteor.startup(function helloOnCreated() {
 });
 
 
+Template.watch.helpers({
+    findItem(){
+        return Questions.find();
+    }
+});
+
 Template.itemsLoaded.helpers({
     LoadItem(){
         return Questions.find({}, { sort: { createdAt: -1 } });
@@ -21,7 +27,7 @@ Template.bar.events({
   }
 });
 
-Template.bar.helpers({
+Template.infoItemNAdd.helpers({
     CantItems() {
         return Questions.find().count();
     } 
