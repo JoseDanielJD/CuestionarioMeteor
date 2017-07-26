@@ -94,7 +94,7 @@
 
 <template name="itemsLoaded">
    {{#each  LoadItem}}
-        {{> item title=title duration=duration createdAt=createdAt}}
+        {{> item title=title duration=duration createdAt=createdAt idpreguntas=idpreguntas}}
   {{/each}}
 </template>
 
@@ -102,7 +102,7 @@
 <template name="item">
   
   <div id="item" class="row">
-    <div class="panel panel-default">
+    <div class="panel panel-primary">
       <div class="panel-heading">
         {{title}} 
       </div>
@@ -115,31 +115,38 @@
           </div>
           
           <div class="col-md-6">
-            <div id="contentProgressBar">
-              <div class="progress">
-                <div class="progress-bar-info" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;">
-                60%
-              </div>
-              </div>
-            </div>         
+            <div class="col-md-3">
+              <label for="">Ganando: </label>
+            </div>
+            <div class="col-md-9">
+              {{>progressBar perc= 60}} 
+            </div>
+                   
           </div>        
           
           <div class="col-md-6">
             <div id="itemButtons" class="col-md-12 col-md-push-3">
               
-              <a href="watch" id={{title}} class="btn btn-secondar"><i class="glyphicon glyphicon-eye-open"></i></a>
-              <a href="" id="add-button" class="btn btn-secondar"><i class="glyphicon glyphicon-pause"></i></a>
-              <a href="edit" id="add-button" class="btn btn-secondar"><i class="glyphicon glyphicon-edit"></i></a>
-              <a href="" id="add-button" class="btn btn-secondar"><i class="glyphicon glyphicon-link"></i></a>
-              <a href="" id="add-button" class="btn btn-secondar btn-danger"><i class="glyphicon glyphicon-trash"></i></a>
-              
+              <a href="watch?title={{title}}" id="see" class="btn btn-secondar"><i class="glyphicon glyphicon-eye-open"></i></a>
+              <a href="" name={{title}} id="pause" class="btn btn-secondar"><i class="glyphicon glyphicon-pause"></i></a>
+              <a href="" name={{title}} id="link" class="btn btn-secondar"><i class="glyphicon glyphicon-link"></i></a>
+              <a href="" name={{idpreguntas}} id="delete" class="btn btn-secondar btn-danger"><i class="glyphicon glyphicon-trash"></i></a>
               </div>          
           </div>          
         </div>
       </div>
     </div>
   </div>
-  
+</template>
+
+<template name="progressBar">
+  <div id="contentProgressBar">
+    <div class="progress">
+      <div class="progress-bar-info" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;">
+    {{perc}}%
+      </div>
+    </div>
+  </div>   
 </template>
 
 <template name="option">
@@ -184,22 +191,46 @@
 
 </template>
 
+
+<template name="watchLoaded">
+   {{#each  findItem}}
+        {{> watch title=title duration=duration createdAt=createdAt idpreguntas=idpreguntas}}
+  {{/each}}
+</template>
+
+
 <template name="watch">
   <div class="container">
-    <div class="panel panel-default">
-      <div class="panel-heading"><label for="">{{title}}</label></div>
+    <div class="panel panel-primary">
+      <div class="panel-heading"><h1>{{title}}</h1></div>
       <div class="panel-body">
           
           <div class="input-group control-group after-add-more">
-            <label for="basic-url">ANSWERS</label>						
+            <label for="basic-url">ANSWERS </label>	
+            <div class="row">
+              {{#each findAnswer idpreguntas }}
+                {{> loadAnswer answer=answer points=points}}
+              {{/each}}
+            </div>
           </div>
           
           <div class="divider"></div>        
-          <label for="basic-url">DURATION: {{duration}}</label>
+          <label for="basic-url">DURATION:</label> {{duration}} (Hours)         
+          
+          <div class="divider"></div>        
+          <label for="basic-url">CREATE AT:</label> {{createdAt}}
 
       </div>
     </div>  
   </div>
 <a href="/" id="add-button" class="btn btn-default">back</a>
-  
 </template>
+
+<Template name="loadAnswer">
+    <div class="col-md-6" id="seeAnswers">
+        <h4>{{answer}}</h4>
+    </div>
+    <div class="col-md-6" >
+        {{>progressBar perc= points}} 
+    </div>
+</Template>

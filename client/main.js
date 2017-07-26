@@ -8,8 +8,15 @@ Meteor.startup(function helloOnCreated() {
 
 
 Template.watch.helpers({
+    findAnswer: function(id){
+        return Answers.find({idRespuesta: id});
+    }
+});
+
+Template.watchLoaded.helpers({
     findItem(){
-        return Questions.find();
+        var param = FlowRouter.current().queryParams.title;
+        return Questions.find({title: param});
     }
 });
 
@@ -19,13 +26,6 @@ Template.itemsLoaded.helpers({
     }
 });
 
-Template.bar.events({
-  'click #add-button': function(e) {
-
-    $('#modalAdd').modal('show');
-        console.log("click")
-  }
-});
 
 Template.infoItemNAdd.helpers({
     CantItems() {
@@ -94,3 +94,17 @@ Template.AddItemTemplate.events({
  
 });
 
+Template.item.events({
+
+    'click #delete': function(e) {
+        console.log(e.currentTarget.name);
+        var param = e.currentTarget.name;
+        Meteor.call('Questions.delete', param);
+    },
+    
+    'click #link': function(e) {
+        var param = e.currentTarget.name;
+        alert("Comparte este enlace a todas las personas que desees que participen en la encuesta. \n https://meteortest1-jb28.c9users.io/vote/userID/"+param);
+    }
+    
+});
