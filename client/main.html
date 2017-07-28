@@ -71,6 +71,7 @@
         <li><a href="#">Stadistics<span class="sr-only">(current)</span></a></li>
         <li><a href="#">Profile</a></li>
         <li><a href="#">Tops</a></li>
+        <li><a href="#">Help</a></li>
       </ul>
       
       <!--Rigth-->
@@ -84,55 +85,69 @@
 
 <template name="infoItemNAdd">
   <div class="row">
-    <div class="col-md-12">
-       <h4>Cantidad de encuestas: {{CantItems}}</h4> 
-       <a href="AddItem" id="add-button" class="btn btn-primary">Add</a>    
+    <div class="col-md-10">
+       <h4>Cantidad de encuestas: {{CantItems}}</h4>
+    </div>
+    <div class="col-md-2">
+       <a href="AddItem" id="add-button" class="btn btn-success">Add</a>    
     </div>    
   </div>
  
 </template>
 
 <template name="itemsLoaded">
-   {{#each  LoadItem}}
-        {{> item title=title duration=duration createdAt=createdAt idpreguntas=idpreguntas}}
-  {{/each}}
+  <div class="panel panel-primary">
+    <div class="panel-heading">
+      <div class="row">
+        <div class="col-md-4">
+          <h5>Titulo</h5>
+        </div>        
+        <div class="col-md-1">
+          <h5>Winner</h5>
+        </div>        
+        <div class="col-md-1">
+          <h5>Views</h5>
+        </div>        
+        <div class="col-md-1">
+          <h5>Time (Hours)</h5>
+        </div>        
+        <div class="col-md-4">
+          
+        </div>
+      </div>
+    </div>
+        {{#each  LoadItem}} 
+            {{> item title=title duration=duration createdAt=createdAt idpreguntas=idpreguntas views=views}}
+        {{/each}}
+  </div>  
 </template>
 
 
 <template name="item">
-  
   <div id="item" class="row">
-    <div class="panel panel-primary">
-      <div class="panel-heading">
-        {{title}} 
-      </div>
+    <div class="col-sm-12 col-md-12 col-lg-12">
       <div class="panel-footer">
         <div class="row">
-          <div class="col-md-12">
-            <div id="time">
-              <label>Tiempo restante: {{duration}} (Hours)</label>
-            </div>
-          </div>
-          
-          <div class="col-md-6">
-            <div class="col-md-3">
-              <label for="">Ganando: </label>
-            </div>
-            <div class="col-md-9">
-              {{>progressBar perc= 60}} 
-            </div>
-                   
+          <div class="col-sm-4 col-md-4 col-lg-4">
+            <strong>{{title}}</strong>
           </div>        
-          
-          <div class="col-md-6">
+          <div class="col-sm-1 col-md-1 col-lg-1">
+            {{Mayor idpreguntas}}
+          </div>        
+          <div class="col-sm-1 col-md-1 col-lg-1">
+            {{views}}
+          </div>        
+          <div class="col-sm-1 col-md-1 col-lg-1">
+            {{duration}}
+          </div>        
+          <div class="col-sm-4 col-md-4 col-lg-4">
             <div id="itemButtons" class="col-md-12 col-md-push-3">
-              
               <a href="watch?title={{title}}" id="see" class="btn btn-secondar"><i class="glyphicon glyphicon-eye-open"></i></a>
               <a href="" name={{title}} id="pause" class="btn btn-secondar"><i class="glyphicon glyphicon-pause"></i></a>
-              <a href="" name={{title}} id="link" class="btn btn-secondar"><i class="glyphicon glyphicon-link"></i></a>
+              <a href="" name={{title}} value={{idpreguntas}} id="link" class="btn btn-secondar"><i class="glyphicon glyphicon-link"></i></a>
               <a href="" name={{idpreguntas}} id="delete" class="btn btn-secondar btn-danger"><i class="glyphicon glyphicon-trash"></i></a>
-              </div>          
-          </div>          
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -186,14 +201,12 @@
       </div>
     </div>
   </div>
-
-<a href="/" id="add-button" class="btn btn-default">back</a>
-
+  <a href="/" id="add-button" class="btn btn-default">back</a>
 </template>
 
 
 <template name="watchLoaded">
-   {{#each  findItem}}
+  {{#each  findItem}}
         {{> watch title=title duration=duration createdAt=createdAt idpreguntas=idpreguntas}}
   {{/each}}
 </template>
@@ -227,10 +240,48 @@
 </template>
 
 <Template name="loadAnswer">
-    <div class="col-md-6" id="seeAnswers">
-        <h4>{{answer}}</h4>
-    </div>
-    <div class="col-md-6" >
-        {{>progressBar perc= points}} 
-    </div>
+      <div class="col-md-6" id="seeAnswers">
+          <h4>{{answer}}</h4>
+      </div>
+      <div class="col-md-6" >
+          {{>progressBar perc= points}} 
+      </div>    
 </Template>
+
+<template name="voteLoaded">
+ {{#each  findItem}}
+        {{> vote title=title idpreguntas=idpreguntas}}
+  {{/each}}  
+</template>
+
+<template name="vote">
+  <div class="container">
+    <div class="panel panel-primary">
+      <div class="panel-heading"><h1>{{title}}</h1></div>
+      <div class="panel-body">
+          
+          <div class="input-group control-group after-add-more">
+            <div class="row">
+             <form class="new-vote">
+                <div class="radio">
+                  {{#each findAnswer idpreguntas }}
+                    {{> loadAnswerClient answer=answer points=points}}
+                  {{/each}}
+                </div>
+                <div class="col-sm-12 col-md-12 col-lg-12" id="Send">
+                   <button type="submit" class="btn btn-success" id="vote">Send</button>                  
+                </div>
+            </form>              
+              
+            </div>
+          </div>
+      </div>
+    </div>  
+  </div>  
+</template>
+
+<template name="loadAnswerClient">
+    <div class="col-md-12" id="seeAnswers">
+      <h4><input type="radio"  name="optradio" value={{answer}}>{{answer}}</h4>
+    </div>
+</template>

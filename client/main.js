@@ -4,6 +4,13 @@ import { ReactiveVar } from 'meteor/reactive-var';
 Meteor.startup(function helloOnCreated() {
   Meteor.subscribe('questionscollection');
   Meteor.subscribe('answercollection');
+
+  if(FlowRouter.current().route.path == "/vote"){//count the vizualizations
+      var itemName = FlowRouter.current().queryParams.title;
+      //update the views of the current item
+        Meteor.call('Questions.updateViews', itemName);
+  }
+  
 });
 
 
@@ -13,10 +20,44 @@ Template.watch.helpers({
     }
 });
 
+Template.vote.helpers({
+    findAnswer: function(id){
+        return Answers.find({idRespuesta: id});
+    }
+});
+
+Template.vote.events({
+    'submit .new-vote'(e) {
+        e.preventDefault();
+        var voteValue = $('form input[type=radio]:checked').val();
+        console.log("voto: ",voteValue);
+        //voy a buscar el id de la pregunta, en base a este modificare el valor de los puntos de la respuesta dada (se hace asi porq las respuestas pueden estar repetidas entre preguntas. ejemplo: Si o No)
+        var title = FlowRouter.current().queryParams.title;
+        console.log("title: ",title);
+        var id = Meteor.call('Questions.getID', title);
+        console.log("id: ",id);
+        
+    }
+});
+
 Template.watchLoaded.helpers({
     findItem(){
         var param = FlowRouter.current().queryParams.title;
         return Questions.find({title: param});
+    }
+});
+
+Template.voteLoaded.helpers({
+    findItem(){
+        var param = FlowRouter.current().queryParams.title;
+        return Questions.find({title: param});
+    }
+});
+
+Template.item.helpers({
+    Mayor: function(id){
+        return Answers.findOne({idRespuesta: id}, {sort: {points: -1}}).answer;
+        
     }
 });
 
@@ -77,18 +118,16 @@ Template.AddItemTemplate.events({
              }
          }
 
-        console.log(ItemAnswer);
-        console.log(Iteminfo);
         title = Iteminfo[0];
         duration = Iteminfo[1];
 
-         id=1;//el id se obtendra del ultimo item creado si existe.
+         id=Questions.find().count()+1;//el id se obtendra del ultimo item creado si existe.
          
         // Insert a item into the collection
-        Meteor.call('Questions.insert', title, duration);
+        Meteor.call('Questions.insert', title, duration , id, 0);
         
         for(i=0; i<ItemAnswer.length; i++){//store the answers asociate with the title
-            Meteor.call('Answers.insert', id, ItemAnswer[i]);  
+            Meteor.call('Answers.insert', ItemAnswer[i] , id);  
         }
      }
  
@@ -97,14 +136,15 @@ Template.AddItemTemplate.events({
 Template.item.events({
 
     'click #delete': function(e) {
-        console.log(e.currentTarget.name);
         var param = e.currentTarget.name;
         Meteor.call('Questions.delete', param);
     },
     
     'click #link': function(e) {
-        var param = e.currentTarget.name;
-        alert("Comparte este enlace a todas las personas que desees que participen en la encuesta. \n https://meteortest1-jb28.c9users.io/vote/userID/"+param);
+        var param = encodeURIComponent(e.currentTarget.name);
+        var txt;
+        var person = prompt("Comparte este enlace a todas las personas que desees que participen en la encuesta.", "https://meteortest1-jb28.c9users.io/vote?userid=111&title="+param);
+  
     }
     
 });
