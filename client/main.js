@@ -6,9 +6,9 @@ Meteor.startup(function helloOnCreated() {
   Meteor.subscribe('answercollection');
 
   if(FlowRouter.current().route.path == "/vote"){//count the vizualizations
-      var itemName = FlowRouter.current().queryParams.title;
+      var id = FlowRouter.current().queryParams.id;
       //update the views of the current item
-        Meteor.call('Questions.updateViews', itemName);
+        Meteor.call('Questions.updateViews', parseInt(id));
   }
   
 });
@@ -32,10 +32,9 @@ Template.vote.events({
         var voteValue = $('form input[type=radio]:checked').val();
         console.log("voto: ",voteValue);
         //voy a buscar el id de la pregunta, en base a este modificare el valor de los puntos de la respuesta dada (se hace asi porq las respuestas pueden estar repetidas entre preguntas. ejemplo: Si o No)
-        var title = FlowRouter.current().queryParams.title;
-        console.log("title: ",title);
-        var id = Meteor.call('Questions.getID', title);
+        var id = FlowRouter.current().queryParams.id;
         console.log("id: ",id);
+        Meteor.call('Answers.vote', parseInt(id),voteValue);
         
     }
 });
@@ -49,8 +48,8 @@ Template.watchLoaded.helpers({
 
 Template.voteLoaded.helpers({
     findItem(){
-        var param = FlowRouter.current().queryParams.title;
-        return Questions.find({title: param});
+        var param = FlowRouter.current().queryParams.id;
+        return Questions.find({idpreguntas: parseInt(param)});
     }
 });
 
@@ -141,9 +140,9 @@ Template.item.events({
     },
     
     'click #link': function(e) {
-        var param = encodeURIComponent(e.currentTarget.name);
+        var param = e.currentTarget.name;//encodeURIComponent(e.currentTarget.name);
         var txt;
-        var person = prompt("Comparte este enlace a todas las personas que desees que participen en la encuesta.", "https://meteortest1-jb28.c9users.io/vote?userid=111&title="+param);
+        var person = prompt("Comparte este enlace a todas las personas que desees que participen en la encuesta.", "https://meteortest1-jb28.c9users.io/vote?userid=111&id="+param);
   
     }
     
