@@ -219,8 +219,9 @@
       <div class="panel-body">
           
           <div class="input-group control-group after-add-more">
-            <label for="basic-url">ANSWERS </label>	
             <div class="row">
+              <div class="col-md-6"><label>ANSWERS </label></div>
+              <div class="col-md-6"><label>VOTOS</label></div> 
               {{#each findAnswer idpreguntas }}
                 {{> loadAnswer answer=answer points=points}}
               {{/each}}
@@ -229,6 +230,7 @@
           
           <div class="divider"></div>        
           <label for="basic-url">DURATION:</label> {{duration}} (Hours)         
+          {{>progressBar perc= duration}}         
           
           <div class="divider"></div>        
           <label for="basic-url">CREATE AT:</label> {{createdAt}}
@@ -240,11 +242,11 @@
 </template>
 
 <Template name="loadAnswer">
-      <div class="col-md-6" id="seeAnswers">
-          <h4>{{answer}}</h4>
+      <div class="col-md-6">
+          {{answer}}
       </div>
       <div class="col-md-6" >
-          {{>progressBar perc= points}} 
+          {{points}}
       </div>    
 </Template>
 
@@ -284,4 +286,10 @@
     <div class="col-md-12" id="seeAnswers">
       <h4><input type="radio"  name="optradio" value={{answer}}>{{answer}}</h4>
     </div>
+</template>
+
+<template name="thanks">
+  <div class="alert alert-success">
+    <strong>Success!</strong> Thanks for participating!
+  </div> 
 </template>

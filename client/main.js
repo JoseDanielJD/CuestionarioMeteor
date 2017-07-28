@@ -31,11 +31,10 @@ Template.vote.events({
         e.preventDefault();
         var voteValue = $('form input[type=radio]:checked').val();
         console.log("voto: ",voteValue);
-        //voy a buscar el id de la pregunta, en base a este modificare el valor de los puntos de la respuesta dada (se hace asi porq las respuestas pueden estar repetidas entre preguntas. ejemplo: Si o No)
         var id = FlowRouter.current().queryParams.id;
-        console.log("id: ",id);
         Meteor.call('Answers.vote', parseInt(id),voteValue);
-        
+        $('#vote').hide();
+        FlowRouter.go('/thanks');
     }
 });
 
@@ -56,7 +55,6 @@ Template.voteLoaded.helpers({
 Template.item.helpers({
     Mayor: function(id){
         return Answers.findOne({idRespuesta: id}, {sort: {points: -1}}).answer;
-        
     }
 });
 
@@ -128,6 +126,8 @@ Template.AddItemTemplate.events({
         for(i=0; i<ItemAnswer.length; i++){//store the answers asociate with the title
             Meteor.call('Answers.insert', ItemAnswer[i] , id);  
         }
+        
+        FlowRouter.go('/');
      }
  
 });

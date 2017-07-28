@@ -1,5 +1,5 @@
-Questions.remove({});//while test
-Answers.remove({});
+/*Questions.remove({});//while test
+Answers.remove({});*/
 
 if (Questions.find().count() === 0) {
     Questions.insert({ title: "Las encuestas son buenas siempre?", createdAt: new Date(), usuario:"Jose", duration: 30, idpreguntas: 1, views: 0});
