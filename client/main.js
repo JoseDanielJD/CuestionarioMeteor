@@ -54,20 +54,20 @@ Template.voteLoaded.helpers({
 
 Template.item.helpers({
     Mayor: function(id){
-        return Answers.findOne({idRespuesta: id}, {sort: {points: -1}}).answer;
+        return Answers.findOne({idRespuesta: id, userID: Meteor.userId()}, {sort: {points: -1}}).answer;
     }
 });
 
 Template.itemsLoaded.helpers({
     LoadItem(){
-        return Questions.find({}, { sort: { createdAt: -1 } });
+        return Questions.find({userID: Meteor.userId()}, { sort: { createdAt: -1 } });
     }
 });
 
 
 Template.infoItemNAdd.helpers({
     CantItems() {
-        return Questions.find().count();
+        return Questions.find({userID: Meteor.userId()}).count();
     } 
 });
 
@@ -100,7 +100,7 @@ Template.AddItemTemplate.events({
      
 
      
-     'submit .new-item'(event) {
+     'submit .new-item'(event) { //add new item
         event.preventDefault();
          var Iteminfo = new Array();
          var ItemAnswer = new Array();
@@ -117,14 +117,15 @@ Template.AddItemTemplate.events({
 
         title = Iteminfo[0];
         duration = Iteminfo[1];
+        userID = Meteor.userId();
 
-         id=Questions.find().count()+1;//el id se obtendra del ultimo item creado si existe.
+         id=Questions.find().count()+1;//(identificador del item)el id se obtendra del ultimo item creado si existe.
          
         // Insert a item into the collection
-        Meteor.call('Questions.insert', title, duration , id, 0);
+        Meteor.call('Questions.insert', title, duration , id, 0,userID);
         
         for(i=0; i<ItemAnswer.length; i++){//store the answers asociate with the title
-            Meteor.call('Answers.insert', ItemAnswer[i] , id);  
+            Meteor.call('Answers.insert', ItemAnswer[i] , id, userID);  
         }
         
         FlowRouter.go('/');
@@ -147,3 +148,8 @@ Template.item.events({
     }
     
 });
+
+Template.loginButtons.rendered = function()
+{
+    Accounts._loginButtonsSession.set('dropdownVisible', true);
+};

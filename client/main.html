@@ -10,7 +10,7 @@
 <!--------------------------------------- Templates -------------------------------------------->
 
 <template name="mainLayout">
-  {{>Template.dynamic template=main }}
+    {{>Template.dynamic template=main }}
 </template>
 
 <template name="mainView">
@@ -37,8 +37,12 @@
 <template name="content">
   {{> bar}}
   <div class="col-md-8 col-lg-8 col-md-push-2" id="content">
-    {{> infoItemNAdd}}
-    {{>itemsLoaded}}
+    {{#if currentUser}}
+      {{> infoItemNAdd}}
+      {{>itemsLoaded}}
+    {{else}}
+        {{> alertLogin}}
+    {{/if}}
   </div>
 </template>
 
@@ -55,27 +59,29 @@
       </button>
       <a class="navbar-brand" href="#">Survey pool</a>
     </div>
+    
 
-    <!-- Collect the nav links, forms, and other content for toggling -->
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <!--Left-->
-      <form class="navbar-form navbar-left">
-        <div class="form-group">
-          <input type="text" class="form-control" placeholder="Search">
-        </div>
-      </form>
-      
-      <!--other buttons-->
-      <ul class="nav navbar-nav">
-        <li><a href="#">Stadistics<span class="sr-only">(current)</span></a></li>
-        <li><a href="#">Profile</a></li>
-        <li><a href="#">Tops</a></li>
-        <li><a href="#">Help</a></li>
-      </ul>
-      
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      {{#if currentUser}}  
+        <!--Left-->
+        <form class="navbar-form navbar-left">
+          <div class="form-group">
+            <input type="text" class="form-control" placeholder="Search">
+          </div>
+        </form>
+        
+        <!--other buttons-->
+        <ul class="nav navbar-nav">
+          <li><a href="#">Stadistics<span class="sr-only">(current)</span></a></li>
+          <li><a href="#">Profile</a></li>
+          <li><a href="#">Tops</a></li>
+          <li><a href="#">Help</a></li>
+        </ul>
+      {{/if}}      
       <!--Rigth-->
       <ul class="nav navbar-nav navbar-right ">
-        {{> loginButtons}}
+        {{> loginButtons align="right"}}
       </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
@@ -292,3 +298,10 @@
     <strong>Success!</strong> Thanks for participating!
   </div> 
 </template>
+
+<template name="alertLogin">
+  <div class="alert alert-info">
+    You must be logged in!
+  </div> 
+</template>
+
