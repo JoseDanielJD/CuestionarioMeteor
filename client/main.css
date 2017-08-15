@@ -1,3 +1,7 @@
+body{
+    background: #F2F2F2;
+}
+
 #sideBar{
     background: #EBE7E7;
     height: 1000px;
@@ -46,4 +50,23 @@
 
 #Send{
     text-align: center;
+}
+
+.IdashBoard{
+    text-align:center;
+    border-left: 1px solid #E6E6E6;
+    background: #FFFFFF;
+}
+
+.dashBoard{
+    margin-bottom: 1%;
+}
+
+.addButton{
+    margin-bottom: 1%;
+}
+
+#mostView{
+    min-height: 5%;
+    overflow: hidden;
 }

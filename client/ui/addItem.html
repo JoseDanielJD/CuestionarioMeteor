@@ -1,0 +1,31 @@
+<template name="AddItemTemplate">
+  <div class="container">
+    <div class="panel panel-default">
+      <div class="panel-heading"><label for="">ADD NEW TOPIC</label></div>
+      <div class="panel-body">
+        <form class="new-item" >
+          <label for="basic-url">TITLE</label>
+          <input type="text" name="addmore" id="title" class="form-control" placeholder="Type a title">
+          <div class="divider"></div>
+          <div class="input-group control-group after-add-more">
+            <label for="basic-url">ANSWERS</label>						
+            <input type="text" name="addmore" id="questionItem" class="form-control" placeholder="Type a posible answer">
+            <div class="input-group-btn"> 
+              <button class="btn btn-success add-more" type="button"><i class="glyphicon glyphicon-plus"></i></button>
+            </div>
+          </div>
+          
+          <div class="divider"></div>        
+          <label for="basic-url">DURATION</label>
+          <input type="text" name="addmore" class="form-control" id="duration" placeholder="Type duration in hours">
+  
+         <div class="col-md-12 col-md-push-5" id="submitNewItem">
+            <button type="submit" class="btn btn-primary" >Submit</button>         
+         </div>             
+
+        </form>
+      </div>
+    </div>
+  </div>
+  <a href="/" id="add-button" class="btn btn-default">back</a>
+</template>

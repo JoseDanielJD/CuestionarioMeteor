@@ -1,0 +1,43 @@
+<template name="voteLoaded">
+ {{#each  findItem}}
+        {{> vote title=title idpreguntas=idpreguntas}}
+  {{/each}}  
+</template>
+
+<template name="vote">
+  <div class="container">
+    <div class="panel panel-primary">
+      <div class="panel-heading"><h1>{{title}}</h1></div>
+      <div class="panel-body">
+          
+          <div class="input-group control-group after-add-more">
+            <div class="row">
+             <form class="new-vote">
+                <div class="radio">
+                  {{#each findAnswer idpreguntas }}
+                    {{> loadAnswerClient answer=answer points=points}}
+                  {{/each}}
+                </div>
+                <div class="col-sm-12 col-md-12 col-lg-12" id="Send">
+                   <button type="submit" class="btn btn-success" id="vote">Send</button>                  
+                </div>
+            </form>              
+              
+            </div>
+          </div>
+      </div>
+    </div>  
+  </div>  
+</template>
+
+<template name="loadAnswerClient">
+    <div class="col-md-12" id="seeAnswers">
+      <h4><input type="radio"  name="optradio" value={{answer}}>{{answer}}</h4>
+    </div>
+</template>
+
+<template name="thanks">
+  <div class="alert alert-success">
+    <strong>Success!</strong> Thanks for participating!
+  </div> 
+</template>

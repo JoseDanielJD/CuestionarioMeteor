@@ -64,13 +64,6 @@ Template.itemsLoaded.helpers({
     }
 });
 
-
-Template.infoItemNAdd.helpers({
-    CantItems() {
-        return Questions.find({userID: Meteor.userId()}).count();
-    } 
-});
-
 Template.AddItemTemplate.events({
      'click .add-more': function(e) { //add new posible answer
         var dv1,div2,div3,input,button;
