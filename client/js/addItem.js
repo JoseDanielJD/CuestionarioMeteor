@@ -22,8 +22,7 @@ Template.AddItemTemplate.events({
      },
  
      'click .remove': function(e) { //delete the posible answer y add new Item
-        console.log("this:",this);
-         $(this).parents(".control-group").remove();
+         $(e.currentTarget).parents(".control-group").remove();
      },
      
      'submit .new-item'(event) { //add new item
@@ -54,6 +53,11 @@ Template.AddItemTemplate.events({
             Meteor.call('Answers.insert', ItemAnswer[i] , id, userID);  
         }
         
+        swal({
+          title: "Sweet!",
+          text: "New survey is added in the fisrt line.",
+          imageUrl: "http://icon-icons.com/icons2/520/PNG/512/Thumb-up_icon-icons.com_51865.png"
+        });
         FlowRouter.go('/');
      }
  

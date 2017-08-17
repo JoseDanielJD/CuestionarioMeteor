@@ -11,3 +11,10 @@ tooltips
 404 not found page
 loader inical (al cargar la pagina)
 error: algunas encuentas (del lado usuario) se repite, porq consulta el id de la pregunta, y como q se repite. fix: agregar a la busqueda el id del usuario.
+
+chart: 
+http://tobiasahlin.com/blog/chartjs-charts-to-get-you-started/
+https://code.tutsplus.com/es/tutorials/getting-started-with-chartjs-pie-doughnut-and-bubble-charts--cms-28446
+
+social: https://lipis.github.io/bootstrap-social/
+sweetAlert: http://t4t5.github.io/sweetalert/

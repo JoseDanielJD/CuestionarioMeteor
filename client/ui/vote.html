@@ -7,7 +7,13 @@
 <template name="vote">
   <div class="container">
     <div class="panel panel-primary">
-      <div class="panel-heading"><h1>{{title}}</h1></div>
+      <div class="panel-heading">
+        {{modalPublicity}}
+        <div id="surveyPoolVotePublicity">
+          <h4>Survey Pool</h4>
+        </div>
+        <h1>{{title}}</h1>
+      </div>
       <div class="panel-body">
           
           <div class="input-group control-group after-add-more">
