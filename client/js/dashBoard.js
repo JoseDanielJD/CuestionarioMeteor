@@ -14,5 +14,4 @@ Template.dashBoard.helpers({//infoItemNAdd
     mostView(){
         return  Questions.findOne({userID: Meteor.userId()}, {sort: {views: -1}}).idpreguntas;
     }
-
 });

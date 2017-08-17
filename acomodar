@@ -1,0 +1,13 @@
+resultados empates
+agregar apis redes sociales
+tabs: all, activas, pausadas, finalizadas
+opcion de opiniones
+Diseñar encuesta, plantillas de encuestas
+Graficar estadisticas Analizar resultados: http://www.chartjs.org/samples/latest/charts/pie.html
+Crear restricciones, opcion de mofificarlas.
+compartir, exportar, comparar resultados
+evaluaciones con calificación automática
+tooltips
+404 not found page
+loader inical (al cargar la pagina)
+error: algunas encuentas (del lado usuario) se repite, porq consulta el id de la pregunta, y como q se repite. fix: agregar a la busqueda el id del usuario.

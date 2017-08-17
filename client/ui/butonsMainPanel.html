@@ -1,0 +1,25 @@
+<template name="butonsMainPanel">
+    <div class="row">
+        <div class="col-sm-12 col-md-12 col-lg-12">
+            
+            <div class="col-sm-4 col-md-4 col-lg-4"></div>
+            
+            <div class="col-sm-4 col-md-4 col-lg-4 col-md-pull-1"> 
+             <div class="dropdown">
+                <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Filter by Status
+                <span class="caret"></span></button>
+                <ul class="dropdown-menu">
+                  <li><a href="#" id="allStatus" >All</a></li>
+                  <li><a href="#" id="activeStatus">Active</a></li>                  
+                  <li><a href="#" id="pauseStatus" >Pause</a></li>
+                  <li><a href="#" id="endedStatus">Ended</a></li>
+                </ul>
+              </div>
+            </div>
+            
+            <div class="col-sm-4 col-md-4 col-lg-4 col-md-push-1"> 
+                <a href="AddItem" id="add-button" class="btn btn-success addButton">Add</a> 
+            </div>
+        </div>
+    </div>
+</template>

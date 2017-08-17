@@ -9,12 +9,13 @@
 <template name="watch">
   <div class="container">
     <div class="panel panel-primary">
-      <div class="panel-heading"><h1>{{title}}</h1></div>
+      <div class="panel-heading">
+            <h1>{{title}}</h1>
+      </div>
       <div class="panel-body">
-          
           <div class="input-group control-group after-add-more">
             <div class="row">
-              <div class="col-md-6"><label>ANSWERS </label></div>
+              <div class="col-md-6"><label>ANSWERS.</label></div>
               <div class="col-md-6"><label>VOTOS</label></div> 
               {{#each findAnswer idpreguntas }}
                 {{> loadAnswer answer=answer points=points}}
@@ -22,7 +23,8 @@
             </div>
           </div>
           
-          <div class="divider"></div>        
+          <div class="divider"></div>
+          {{>butonChangeStatus}} 
           <label for="basic-url">DURATION:</label> {{duration}} (Hours)<br>         
           <label>TIME LEFT:</label>{{>progressBar perc= duration}}         
           
@@ -46,10 +48,22 @@
 </template>
 
 <Template name="loadAnswer">
-      <div class="col-md-6">
-          {{answer}}
-      </div>
-      <div class="col-md-6" >
-          {{points}}
-      </div>    
+  <div class="col-md-12">
+    <div class="col-md-6">
+        {{answer}}
+    </div>
+    <div class="col-md-6" >
+        {{points}}
+    </div>    
+  </div>    
+</Template>
+
+<Template name="butonChangeStatus">
+  <div style="text-align:center">
+    <div class="btn-group" role="group" aria-label="...">
+      <button type="button" class="btn btn-default">Activate</button>
+      <button type="button" class="btn btn-default">Pause</button>
+      <button type="button" href="/" class="btn btn-default">Finalize</button>
+    </div>    
+  </div>
 </Template>

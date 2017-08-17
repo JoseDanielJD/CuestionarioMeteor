@@ -2,29 +2,6 @@ body{
     background: #F2F2F2;
 }
 
-#sideBar{
-    background: #EBE7E7;
-    height: 1000px;
-    overflow: hidden;
-}
-
-#sideBarUser{
-  background-image: url("https://static.vecteezy.com/system/resources/previews/000/095/276/non_2x/abstract-gradient-background-vector.jpg");
-  height: 20%;
-}
-
-#sideBar{
-    padding: 0;
-}
-
-#avatar{
-    margin-left: 40%;
-}
-
-#name{
-    padding-left: 35%;
-}
-
 #contentUser{
     padding-top: 15%;
 }
@@ -69,4 +46,26 @@ body{
 #mostView{
     min-height: 5%;
     overflow: hidden;
+}
+
+#panelMainContent{
+    border: none;
+}
+
+#headingPanelMainContent{
+    background: #E7E7ED;
+    color: black;
+    font: bold;
+}
+
+#contentItems{
+    padding: 0;
+}
+
+.icon{
+    color:#585858;
+}
+
+#barMain{
+    background: #E7E7ED;
 }

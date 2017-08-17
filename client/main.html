@@ -19,45 +19,40 @@
 
 <template name="content">
   {{> bar}}
-  {{> dashBoard}}
-  <div class="col-md-8 col-lg-8 col-md-push-2" id="content">
-    {{#if currentUser}}
-      {{> infoItemNAdd}}
-      {{>itemsLoaded}}
-    {{else}}
-        {{> alertLogin}}
-    {{/if}}
-  </div>
-</template>
-
-
-<template name="infoItemNAdd">
-  <div class="row">
-    <div class="col-md-10"></div>
-    <div class="col-md-2">
-       <a href="AddItem" id="add-button" class="btn btn-success addButton">Add</a>    
-    </div>    
+  {{#if currentUser}}
+    {{> dashBoard}}
+  {{/if}}
+  <div class="col-sm-12 col-md-12 col-lg-12" id="contentItems">
+    <div class="col-sm-1 col-md-1 col-lg-1"></div>
+    <div class="col-sm-1 col-md-10 col-lg-10" id="content">  
+      {{#if currentUser}}
+        {{>itemsLoaded}}
+      {{else}}
+          {{> alertLogin}}
+      {{/if}}
+    </div>
+    <div class="col-sm-1 col-md-1 col-lg-1"></div>
   </div>
 </template>
 
 <template name="itemsLoaded">
-  <div class="panel panel-primary">
-    <div class="panel-heading">
+  <div class="panel panel-primary" id= "panelMainContent">
+    <div class="panel-heading"  id= "headingPanelMainContent">
       <div class="row">
         <div class="col-md-4">
-          <h5>Titulo</h5>
+          <h4>Titulo.</h4>
         </div>        
         <div class="col-md-1">
-          <h5>Winner</h5>
+          <h4>Winner</h4>
         </div>        
         <div class="col-md-1">
-          <h5>Views</h5>
+          <h4>Views</h4>
         </div>        
         <div class="col-md-1">
-          <h5>Time (Hours)</h5>
+          <h4>Time</h4>
         </div>        
-        <div class="col-md-4">
-          
+        <div class="col-md-5">
+              {{> butonsMainPanel}}
         </div>
       </div>
     </div>
@@ -67,14 +62,13 @@
   </div>  
 </template>
 
-
 <template name="item">
   <div id="item" class="row">
     <div class="col-sm-12 col-md-12 col-lg-12">
       <div class="panel-footer">
         <div class="row">
           <div class="col-sm-4 col-md-4 col-lg-4">
-            <strong>{{title}}</strong>
+            <h5>{{title}}</h5>
           </div>        
           <div class="col-sm-1 col-md-1 col-lg-1">
             {{Mayor idpreguntas}}
@@ -86,10 +80,10 @@
             {{duration}}
           </div>        
           <div class="col-sm-4 col-md-4 col-lg-4">
-            <div id="itemButtons" class="col-md-12 col-md-push-3">
-              <a href="watch?title={{title}}" id="see" class="btn btn-secondar"><i class="glyphicon glyphicon-eye-open"></i></a>
-              <a href="" name={{title}} id="pause" class="btn btn-secondar"><i class="glyphicon glyphicon-pause"></i></a>
-              <a href="" name={{idpreguntas}}  id="link" class="btn btn-secondar"><i class="glyphicon glyphicon-link"></i></a>
+            <div id="itemButtons" class="col-md-12 col-md-push-5">
+              <a href="watch?title={{title}}" id="see" class="btn btn-secondar"><i class="glyphicon glyphicon-eye-open icon"></i></a>
+              <a href="" name={{title}} id="pause" class="btn btn-secondar"><i class="glyphicon glyphicon-pause icon"></i></a>
+              <a href="" name={{idpreguntas}}  id="link" class="btn btn-secondar"><i class="glyphicon glyphicon-link icon"></i></a>
               <a href="" name={{idpreguntas}} id="delete" class="btn btn-secondar btn-danger"><i class="glyphicon glyphicon-trash"></i></a>
             </div>
           </div>
@@ -104,8 +98,3 @@
     You must be logged in! 
   </div> 
 </template>
-
-<template name="stadistic-graph">
-  
-</template>
-
