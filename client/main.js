@@ -33,41 +33,17 @@ Template.item.events({
         var param = e.currentTarget.name;
         
         swal({
-            title: "Are you sure?",
-            text: "You will not be able to recover this imaginary file!",
-            type: "warning",
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            type: 'warning',
             showCancelButton: true,
-            confirmButtonColor: "#DD6B55",
-            confirmButtonText: "Yes, delete it!",
-            cancelButtonText: "No, cancel plx!",
-            closeOnConfirm: false,
-            closeOnCancel: false
-        },
-        function(isConfirm){
-            if (isConfirm) {
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+            }).then(function () {
                 Meteor.call('Questions.delete', param);
-                swal("Deleted!", "Your imaginary file has been deleted.", "success");
-            } else {
-                swal("Cancelled", "Your imaginary file is safe :)", "error");
-            }
-        });
-        
-        
-        /*swal({
-            title: "Are you sure?",
-            //text: "Submit to run ajax request",
-            type: "info",
-            showCancelButton: true,
-            closeOnConfirm: false,
-            showLoaderOnConfirm: true,
-            },
-        function(){
-            Meteor.call('Questions.delete', param); 
-            //colocar una promesa!
-            swal("The survey was deleted!");
-        });*/
-        
-        
+                swal('Deleted!','The survey was deleted!','success')
+        })
     },
     
     'click #link': function(e) {
@@ -75,14 +51,14 @@ Template.item.events({
         var txt;
         
         swal({
-          title: "<small>Sharing</small>!",
-          //imageUrl:"//www.esri.com/training/assets/catalogMetadata/574785c88733a8646d1d3a2e/Sharing_Publishing1.svg",
-          text: "Share this link to everyone you want to participate in the survey <br><span style='color:#F8BB86'>https://meteortest1-jb28.c9users.io/vote?userid=111&id=<span>"+param,
-          html: true
-        });
-        
-        //var person = prompt("Comparte este enlace a todas las personas que desees que participen en la encuesta.", "https://meteortest1-jb28.c9users.io/vote?userid=111&id="+param);
-    }
+            title: '<small>Sharing</small>!',
+            html:
+            "<span>Share this link to everyone you want to participate in the survey <br><span style='color:#F8BB86'>https://meteortest1-jb28.c9users.io/vote?userid=111&id=</span>"+param,
+            showCloseButton: true,
+            showCancelButton: false,
+            confirmButtonText:'<i class="fa fa-files-o"></i> Copy',
+        })
+     }
     
 });
 

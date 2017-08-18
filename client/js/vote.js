@@ -4,11 +4,13 @@ Template.vote.helpers({
     },
     modalPublicity: function(){
         swal({
-          title: "Survey Pool",
-          text: "This is a Survey Pool questionnaire. Your response will be sent once you make your request.",
-          imageUrl: "http://savet.com.ar/wp-content/uploads/2015/04/encuesta7.jpg"
-        });
-        
+          title: 'Welcome!',
+          text: 'This is a Survey Pool questionnaire.',
+          imageUrl: 'https://www.canddi.com/images/blog/2016-04-11/surveymonkey-logo.jpg',
+          imageWidth: 200,
+          imageHeight: 100,
+          animation: false
+        })
     }
 });
 
@@ -20,8 +22,12 @@ Template.vote.events({
         var id = FlowRouter.current().queryParams.id;
         Meteor.call('Answers.vote', parseInt(id),voteValue);
         $('#vote').hide();
-        swal("Your answer was send!", "Thanks for participating!", "success")
-        //FlowRouter.go('/thanks');
+        swal(
+          'Your answer was send!',
+          'Thanks for participating!',
+          'success'
+        )
+        FlowRouter.go('/thanks');
     }
 });
 

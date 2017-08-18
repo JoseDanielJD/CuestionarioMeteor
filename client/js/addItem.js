@@ -47,17 +47,18 @@ Template.AddItemTemplate.events({
          id=Questions.find().count()+1;//(identificador del item)el id se obtendra del ultimo item creado si existe.
          
         // Insert a item into the collection
-        Meteor.call('Questions.insert', title, duration , id, 0,userID);
+        Meteor.call('Questions.insert',title,duration,id,0,userID);
         
         for(i=0; i<ItemAnswer.length; i++){//store the answers asociate with the title
-            Meteor.call('Answers.insert', ItemAnswer[i] , id, userID);  
+            Meteor.call('Answers.insert',ItemAnswer[i],id,0,userID);  
         }
+
+        swal(
+          'Sweet!',
+          'New survey is added in the fisrt line.',
+          'success'
+        )
         
-        swal({
-          title: "Sweet!",
-          text: "New survey is added in the fisrt line.",
-          imageUrl: "http://icon-icons.com/icons2/520/PNG/512/Thumb-up_icon-icons.com_51865.png"
-        });
         FlowRouter.go('/');
      }
  
