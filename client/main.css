@@ -129,3 +129,5 @@ footer{
     /*border-color: #E7E7ED;
     background: #E7E7ED;*/
 }
+
+.chart {display: block; width: 100%;}

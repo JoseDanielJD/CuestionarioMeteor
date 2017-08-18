@@ -18,3 +18,11 @@ https://code.tutsplus.com/es/tutorials/getting-started-with-chartjs-pie-doughnut
 
 social: https://lipis.github.io/bootstrap-social/
 sweetAlert: http://t4t5.github.io/sweetalert/
+SweetAlert2: https://limonte.github.io/sweetalert2/
+
+fix chart: https://forums.meteor.com/t/charts-js-not-working/34244/8
+            https://forums.meteor.com/t/charts-js-not-working/34244/4
+            https://stackoverflow.com/questions/38759683/my-chart-is-not-shown-on-browser-screen-using-chart-js-in-meteor
+            
+REVISAR:
+    http://underscorejs.org/

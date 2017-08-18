@@ -22,6 +22,6 @@ accounts-ui
 accounts-password
 kadira:flow-router
 kadira:blaze-layout
-chart:chart
 fortawesome:fontawesome
 cleandersonlobo:sweetalert2
+chart:chart

@@ -53,11 +53,29 @@ Template.item.events({
         swal({
             title: '<small>Sharing</small>!',
             html:
-            "<span>Share this link to everyone you want to participate in the survey <br><span style='color:#F8BB86'>https://meteortest1-jb28.c9users.io/vote?userid=111&id=</span>"+param,
+            "<span>Share this link to everyone you want to participate in the survey <br><br><span style='color:#F8BB86' class='js-copytextarea'>https://meteortest1-jb28.c9users.io/vote?userid=111&id=</span>"+"<span style='color:#F8BB86'> class='js-copytextarea'"+param+"</span>",
             showCloseButton: true,
             showCancelButton: false,
-            confirmButtonText:'<i class="fa fa-files-o"></i> Copy',
+            confirmButtonText:'<i class="fa fa-files-o as"></i>Copy',
         })
+     },
+     
+     'click .as': function(e){
+         console.log('copy');
+        var copyTextareaBtn = document.querySelector('.js-textareacopybtn');
+        
+        copyTextareaBtn.addEventListener('click', function(event) {
+          var copyTextarea = document.querySelector('.js-copytextarea');
+          copyTextarea.select();
+        
+          try {
+            var successful = document.execCommand('copy');
+            var msg = successful ? 'successful' : 'unsuccessful';
+            console.log('Copying text command was ' + msg);
+          } catch (err) {
+            console.log('Oops, unable to copy');
+          }
+        });
      }
     
 });
