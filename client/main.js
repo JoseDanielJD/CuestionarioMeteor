@@ -1,10 +1,15 @@
 import { Template } from 'meteor/templating';
 import { ReactiveVar } from 'meteor/reactive-var';
+import { Tracker } from 'meteor/tracker'
 
 Meteor.startup(function helloOnCreated() {
   Meteor.subscribe('questionscollection');
   Meteor.subscribe('answercollection');
   pos=0;
+  
+  //inicializo los valores de la grafica
+    this.value1Graph = new ReactiveVar(0);
+    this.value2Graph = new ReactiveVar(0);
 
   if(FlowRouter.current().route.path == "/vote"){//count the vizualizations
       var id = FlowRouter.current().queryParams.id;
@@ -82,5 +87,5 @@ Template.item.events({
 
 Template.loginButtons.rendered = function()
 {
-    Accounts._loginButtonsSession.set('dropdownVisible', true);
+    Accounts._loginButtonsSession.set('dropdownVisible', false);
 };

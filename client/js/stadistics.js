@@ -1,10 +1,37 @@
+Template.Stadistics.events({
+    'click #update': function(e){
+    drawChart(Math.floor((Math.random() * 50) + 1),Math.floor((Math.random() * 50) + 1));
+        value1Graph.set(Math.floor((Math.random() * 50) + 1));
+        value2Graph.set(Math.floor((Math.random() * 50) + 1));
+        FlowRouter.reload();
+        console.log("update graph!-")
+    }
+})
+
 Template.Stadistics.rendered = function(){
-    Deps.autorun(function() { drawChart(); });
+    /*Meteor.call('Items.count', function(error, result){ //invoco al metodo contar items y me traigo el resultado en un callback
+        console.log("recibido de backend: ",result);
+        value1Graph.set(result);
+        value2Graph.set(result+10);
+    });*/
+    Deps.autorun(function() { drawChart(value1Graph.get(),value2Graph.get()); });
 }
 
-function drawChart() {
-    var oldCount = 2;
-    var newCount = 4;
+if (Meteor.isClient) {
+    Tracker.autorun(function() {
+        Meteor.call('Items.count', function(error, result){ //invoco al metodo contar items y me traigo el resultado en un callback
+            console.log("recibido de backend: ",result);
+            value1Graph.set(result);
+            value2Graph.set(result+10);
+        });
+    });
+    //Tracker.autorun(drawChart());
+     //Tracker.autorun(function() { drawChart(value1Graph.get(),value2Graph.get()); });
+}
+
+function drawChart(a,b) {
+    var oldCount = a;
+    var newCount = b;
     var data = [{
         value: newCount,
         color: "#e53935",
