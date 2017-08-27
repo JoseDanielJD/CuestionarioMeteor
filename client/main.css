@@ -7,6 +7,10 @@ body{
     padding-top: 15%;
 }
 
+#content{
+    padding:0;
+}
+
 .divider{
     margin: 20px auto;
     width: 100%;
@@ -54,8 +58,9 @@ body{
 }
 
 #headingPanelMainContent{
-    background: #E7E7ED;
-    color: black;
+    /*background: #E7E7ED;*/
+    background: #424242;
+    color: #777;
     font: bold;
     border: none;
 }
@@ -70,8 +75,8 @@ body{
 }
 
 #barMain{
-   background: #E7E7ED;
-    /*background: #424242;*/
+   /*background: #E7E7ED;*/
+    background: #424242;
 }
 
 #surveyPoolVotePublicity{
@@ -131,3 +136,7 @@ footer{
 }
 
 .chart {display: block; width: 100%;}
+
+.graph{
+    background: white;
+}

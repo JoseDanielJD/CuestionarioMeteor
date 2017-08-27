@@ -8,27 +8,21 @@ Template.Stadistics.events({
     }
 })
 
-Template.Stadistics.rendered = function(){
-    /*Meteor.call('Items.count', function(error, result){ //invoco al metodo contar items y me traigo el resultado en un callback
-        console.log("recibido de backend: ",result);
-        value1Graph.set(result);
-        value2Graph.set(result+10);
-    });*/
+/*------------------------------ graph1 ----------------------------------*/
+
+Template.graph1.rendered = function(){
     Deps.autorun(function() { drawChart(value1Graph.get(),value2Graph.get()); });
 }
 
-if (Meteor.isClient) {
-    Tracker.autorun(function() {
+if (Meteor.isClient) { 
+    Tracker.autorun(function() {//seguidor de datos, genera reactividad. esto ejecuta el metodo, meteor.call cada vez que los datos en la bd cambien, 
         Meteor.call('Items.count', function(error, result){ //invoco al metodo contar items y me traigo el resultado en un callback
             console.log("recibido de backend: ",result);
             value1Graph.set(result);
             value2Graph.set(result+10);
         });
     });
-    //Tracker.autorun(drawChart());
-     //Tracker.autorun(function() { drawChart(value1Graph.get(),value2Graph.get()); });
-}
-
+ }
 function drawChart(a,b) {
     var oldCount = a;
     var newCount = b;
@@ -49,10 +43,9 @@ function drawChart(a,b) {
     }
     // Added a callback here.
     setTimeout( function(){
-        if ($("#myChart").get(0)) {
-            var ctx = $("#myChart").get(0).getContext("2d");
+        if ($("#graph1").get(0)) {
+            var ctx = $("#graph1").get(0).getContext("2d");
             var myNewChart = new Chart(ctx);
-            console.log(myNewChart);
             new Chart(ctx).Pie(data, pieOptions);
         }   
     })
